@@ -1,7 +1,7 @@
 
 <div class="container">
     <ng-container *ngIf="loading; else groupInfo">
-      <mat-spinner></mat-spinner>
+      <mat-spinner class="spinner"></mat-spinner>
     </ng-container>
     <ng-template class="group-info" #groupInfo>
       <ng-container *ngIf="drivers.length; else noDrivers">
@@ -73,6 +73,6 @@
       <p class="msg-1">There are no drivers to display.</p>
     </ng-template>
 
-    <app-map-controller [selectedDriver]="selectedDriver"></app-map-controller>
+    <app-map-controller *ngIf="!loading" [selectedDriver]="selectedDriver"></app-map-controller>
 
 </div>
