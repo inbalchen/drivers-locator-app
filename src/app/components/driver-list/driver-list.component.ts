@@ -32,12 +32,6 @@ export class DriverListComponent implements OnInit {
     });
   }
 
-  getDrivers(): void {
-    this.driverService.getDrivers().subscribe(drivers => {
-      this.drivers = drivers;
-    });
-  }
-
   onEdit(driver: Driver): void {
     const dialogRef = this.dialog.open(EditDriverDialogComponent, {
       maxWidth: '250px',
