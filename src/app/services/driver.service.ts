@@ -12,12 +12,14 @@ export class DriverService {
   constructor(private http: HttpClient) { }
 
   getDriversInit(): Observable<Driver[]> {
+    //get drivers list from JSON file and store on localstorage
     return this.http.get<Driver[]>(this.driversUrl).pipe(
       tap((drivers) => localStorage.setItem('drivers', JSON.stringify(drivers)))
     );
   }
 
   getDrivers(): Observable<Driver[]> {
+    //get current drivers from localstorage
     const driversString = localStorage.getItem('drivers');
     if (driversString) {
       const drivers: Driver[] = JSON.parse(driversString);
@@ -28,6 +30,7 @@ export class DriverService {
   }
 
   updateDriver(driver: Driver): Observable<any> {
+    //update driver
     const drivers = JSON.parse(localStorage.getItem('drivers') || '[]');
     const index = drivers.findIndex((d: Driver) => d.id === driver.id);
     if (index !== -1) {
@@ -39,6 +42,7 @@ export class DriverService {
   }
 
   deleteDriver(driverId: number): Observable<any> {
+    //delete driver
     const drivers = JSON.parse(localStorage.getItem('drivers') || '[]');
     const index = drivers.findIndex((d: Driver) => d.id === driverId);
     if (index !== -1) {
@@ -48,17 +52,4 @@ export class DriverService {
     }
     return of(false);
   }
-
-  setActiveDriver(driver: Driver | null): void {
-    localStorage.setItem('activeDriver', JSON.stringify(driver));
-  }
-
-  getActiveDriver(): Driver | null {
-    const driverString = localStorage.getItem('activeDriver');
-    if (driverString) {
-      return JSON.parse(driverString);
-    }
-    return null;
-  }
-
 }
