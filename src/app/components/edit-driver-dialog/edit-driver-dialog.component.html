@@ -2,18 +2,23 @@
 <div mat-dialog-content>
     <img src="../../../assets/images/driver-icon.jpg" alt="driver-icon">
     <form [formGroup]="editDriverForm" (ngSubmit)="onSubmit()">
+
+        <!-- Name Field -->
         <mat-form-field appearance="fill">
             <input matInput formControlName="name" placeholder="Name">
         </mat-form-field>
     
+        <!-- Email Field -->
         <mat-form-field appearance="fill">
             <input matInput formControlName="email" placeholder="Email">
         </mat-form-field>
     
+        <!-- Phone Field -->
         <mat-form-field appearance="fill">
             <input matInput formControlName="phone" placeholder="Phone">
         </mat-form-field>
         
+        <!-- Actions -->
         <div class="button-row">
             <button mat-raised-button color="primary" type="submit">Save</button>
             <button mat-raised-button type="button" (click)="onCancel()">Cancel</button>
