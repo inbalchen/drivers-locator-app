@@ -9,10 +9,10 @@ export class MapControllerComponent implements OnChanges {
   @Input() selectedDriver: any;
   
   // google maps zoom level
-  zoom: number = 8;
+  zoom: number = 9;
   // initial center position for the map
-  lat: number = 51.673858;
-  lng: number = 7.815982;
+  lat: number = 0;
+  lng: number = 0;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selectedDriver'] && changes['selectedDriver'].currentValue) {
@@ -21,8 +21,16 @@ export class MapControllerComponent implements OnChanges {
       if (driver && driver.location) {
         this.lat = driver.location.lat;
         this.lng = driver.location.lng;
-        this.zoom = 12;
+      }else {
+        // reset the map to default values if the selected driver is null
+        this.reset();
       }
     }
+  }
+
+  reset(): void {
+    this.zoom = 10;
+    this.lat = 51.673858;
+    this.lng = 7.815982;
   }
 }
